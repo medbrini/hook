@@ -1,16 +1,20 @@
-import React from "react";
-import MovieCard from "./MovieCard";
-import AddMovie from "./AddMovie";
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Row, Col } from 'react-bootstrap'
+import MovieCard from './MovieCard';
+function Movieslist({ moviesList, titlefilter, ratingfilter }) {
+    return (
+        <Row xs={2} md={4} className="g-4">
+            {moviesList.filter(
+                (movieElement) =>
+                    movieElement.title?.toLowerCase().includes(titlefilter?.toLowerCase().trim()) &&
+                    movieElement.rating >= ratingfilter).map((movieElement, index) => (
+                <Col key={index}>
+                    <MovieCard movie={movieElement} />
+                </Col>
+            ))}
+        </Row>
+    );
+}
 
-const MovieList = ({movies}) => {
-return (
-    <div>
-        {movies.map((movie, index) =>(
-            <MovieCard key={index} movie={movie}/>
-        ))}
-        <AddMovie/>
-    </div>
-);
-};
-
-export default MovieList;
+export default Movieslist;
